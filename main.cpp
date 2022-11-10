@@ -13,7 +13,7 @@ bool inits();
 
 int main() {
 	
-	if (!inits()) {
+	if (inits()){				// Si al tener algun Init se regreso un "1" (EXIT_FAILURE) se retornara un 1 de igual manera.
 		return EXIT_FAILURE;
 	}
 
@@ -24,14 +24,13 @@ int main() {
 
 	ALLEGRO_DISPLAY* display = al_create_display(anchoPantalla, altoPantalla);
 	ALLEGRO_EVENT_QUEUE* event_queue = al_create_event_queue();
-
+	
 	ALLEGRO_COLOR fondoDefault = al_color_name("forestgreen");
 
 	ALLEGRO_COLOR botones = al_color_html("#bdffff");
 	
 	ALLEGRO_COLOR color_letra = al_color_html("#005452");
 	ALLEGRO_FONT* fuenteBase_BebasFont = al_load_font("resources/Bebas-Regular.ttf", 100, 0);
-
 	
 	al_register_event_source(event_queue, al_get_mouse_event_source() );
 
