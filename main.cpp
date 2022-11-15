@@ -13,6 +13,7 @@ void HTP_dialog(ALLEGRO_DISPLAY* display);
 
 int main() {
 
+
 	inits();
 
 	bool inGame = true;
@@ -23,9 +24,12 @@ int main() {
 	al_set_app_name("Solitarie 2022");
 
 	ALLEGRO_DISPLAY* display = al_create_display(ancho, alto);
+	al_set_display_icon(display, al_load_bitmap("resources/Solitarie2022-AppLogo.png"));
 	ALLEGRO_EVENT_QUEUE* colaEventos = al_create_event_queue();
 	ALLEGRO_COLOR fondo = al_color_name("forestgreen");
 	ALLEGRO_EVENT evento;
+
+	ALLEGRO_BITMAP* fondo_BMP = al_load_bitmap("resources/Solitarie2022-Logo.png");
 
 	boton play("resources/ButtonPlayPressing.png", "resources/ButtonPlayWithoutPressing.png", ancho / 2, alto / 2, ALLEGRO_ALIGN_CENTER);
 	boton HTP("resources/Button_HTP_Pressing.png", "resources/Button_HTP_WithoutPressing.png", ancho / 2, (alto / 2) + ((alto / 2) / 4), ALLEGRO_ALIGN_CENTER);
@@ -43,10 +47,11 @@ int main() {
 
 		al_clear_to_color(fondo);
 
-
+		al_draw_bitmap(fondo_BMP, (ancho / 2) - (al_get_bitmap_width(fondo_BMP) / 2), alto / 8, 0);
 		play.print();
 		HTP.print();
 		close.print();
+
 
 
 		switch (evento.type) {
@@ -77,6 +82,7 @@ int main() {
 
 	al_destroy_display(display);
 	al_destroy_event_queue(colaEventos);
+	al_destroy_bitmap(fondo_BMP);
 
 	al_shutdown_native_dialog_addon();
 	al_shutdown_image_addon();
