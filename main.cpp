@@ -9,6 +9,7 @@
 using namespace std;
 
 void inits();
+void setNewPos(boton, ALLEGRO_EVENT);
 void HTP_dialog(ALLEGRO_DISPLAY* display);
 
 int main() {
@@ -18,18 +19,18 @@ int main() {
 
 	bool inGame = true;
 
-	int ancho = 1080;
-	int alto = 720;
-
 	al_set_app_name("Solitarie 2022");
-
-	ALLEGRO_DISPLAY* display = al_create_display(ancho, alto);
+	
+	ALLEGRO_DISPLAY* display = al_create_display(1080, 720);
 	al_set_display_icon(display, al_load_bitmap("resources/Solitarie2022-AppLogo.png"));
 	ALLEGRO_EVENT_QUEUE* colaEventos = al_create_event_queue();
 	ALLEGRO_COLOR fondo = al_color_name("forestgreen");
 	ALLEGRO_EVENT evento;
 
 	ALLEGRO_BITMAP* fondo_BMP = al_load_bitmap("resources/Solitarie2022-Logo.png");
+
+	int ancho = al_get_display_width(display);
+	int alto = al_get_display_height(display);
 
 	boton play("resources/ButtonPlayPressing.png", "resources/ButtonPlayWithoutPressing.png", ancho / 2, alto / 2, ALLEGRO_ALIGN_CENTER);
 	boton HTP("resources/Button_HTP_Pressing.png", "resources/Button_HTP_WithoutPressing.png", ancho / 2, (alto / 2) + ((alto / 2) / 4), ALLEGRO_ALIGN_CENTER);
@@ -43,6 +44,7 @@ int main() {
 	al_register_event_source(colaEventos, al_get_mouse_event_source());
 
 	while (inGame) {
+
 		al_wait_for_event(colaEventos, &evento);
 
 		al_clear_to_color(fondo);
@@ -52,11 +54,25 @@ int main() {
 		HTP.print();
 		close.print();
 
-
-
 		switch (evento.type) {
 		case ALLEGRO_EVENT_DISPLAY_CLOSE:
 			inGame = false;
+			break;
+		case ALLEGRO_EVENT_DISPLAY_RESIZE:
+			al_acknowledge_resize(display);
+
+			ancho = al_get_display_width(display);
+			alto = al_get_display_height(display);
+
+			play.setPosX(ancho / 2, ALLEGRO_ALIGN_CENTRE);
+			play.setPosY(alto / 2);
+
+			HTP.setPosX(ancho / 2,  ALLEGRO_ALIGN_CENTRE);
+			HTP.setPosY((alto / 2) + ((alto / 2) / 4));
+
+			close.setPosX(ancho / 2, ALLEGRO_ALIGN_CENTRE);
+			close.setPosY( (alto / 2) + (alto / 4) );
+
 			break;
 		case ALLEGRO_EVENT_MOUSE_AXES:
 			play.print();
@@ -96,6 +112,7 @@ void inits() {
 	al_init_native_dialog_addon();
 	al_init_image_addon();
 	al_install_mouse();
+	al_set_new_display_flags(ALLEGRO_RESIZABLE);
 }
 
 void HTP_dialog(ALLEGRO_DISPLAY* display){

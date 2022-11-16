@@ -18,14 +18,13 @@ public:
 
 	boton(const char* = "", const char* = "", int = 0, int = 0, int = ALLEGRO_ALIGN_RIGHT);
 
-	inline void setPosX(int posX) { this->positionX = posX; }
+	inline void setPosX(int posX, int alineation);
 	inline void setPosY(int posY) { this->positionY = posY; }
 
 	inline int getPosX() { return positionX; }
 	inline int getPosY() { return positionY; }
 	inline float getWidht() { return widht; }
 	inline float getHeight() { return height; }
-
 
 	void print();
 	bool isAboveButton();
@@ -58,6 +57,20 @@ boton::boton(const char* file_name_button_pressed, const char* file_name_button_
 	}
 
 }
+void boton::setPosX(int posX, int alineation) {
+
+	switch (alineation) {
+	case ALLEGRO_ALIGN_LEFT:
+		this->positionX = posX - widht;
+		break;
+	case ALLEGRO_ALIGN_CENTRE:
+		this->positionX = posX - (widht / 2);
+		break;
+	case ALLEGRO_ALIGN_RIGHT:
+		this->positionX = posX;
+		break;
+	}
+}
 
 bool boton::isAboveButton() {
 	al_get_mouse_state(&mouse_position);
@@ -77,9 +90,9 @@ void boton::print() {
 }
 
 bool boton::clickAboveButton(ALLEGRO_EVENT eventoAnalizar) {
-	if (eventoAnalizar.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
-		return(eventoAnalizar.mouse.x >= positionX and eventoAnalizar.mouse.x <= positionX + widht
-			and eventoAnalizar.mouse.y >= positionY and eventoAnalizar.mouse.y <= positionY + height);
+
+	if (eventoAnalizar.mouse.button == 1) {	// Analiza si es el click izquierdo.
+		return(isAboveButton());			// Retorna si esta encima del boton
 	}
 	return false;
 
