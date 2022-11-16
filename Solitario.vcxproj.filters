@@ -26,8 +26,5 @@
     <ClInclude Include="objects\classButton.hpp">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="objects\classCard.hpp">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>
