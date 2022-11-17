@@ -8,6 +8,10 @@
 
 using namespace std;
 
+//TODO Cambio de ventana en menu a juego
+//TODO Construir baraja con shuffle
+//
+
 void inits();
 void setNewPos(boton, ALLEGRO_EVENT);
 void HTP_dialog(ALLEGRO_DISPLAY* display);

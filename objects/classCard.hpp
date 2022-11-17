@@ -2,6 +2,10 @@
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_image.h>
 
+//TODO Cambio de ventana en menu a juego
+//TODO Construir baraja con shuffle
+//
+
 using namespace std;
 
 enum PALO{DIAMOND, HEART, SPADES, CLUBS};
@@ -32,7 +36,7 @@ Card::Card() {
 
 Card::Card(int number, char suit) {
 	this->number = number;
-	this->suits = suit;
+	this->suits = suit; 
 
 	switch (suit){
 	case 'd':
