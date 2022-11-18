@@ -1,6 +1,13 @@
 #include <string>
+#include <iostream>
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_image.h>
+
+using namespace std;
+
+//TODO Cambio de ventana en menu a juego
+//TODO Construir baraja con shuffle
+//
 
 using namespace std;
 
@@ -21,31 +28,44 @@ private:
 
 public:
 	Card();
-	Card(int number, char suit);
+	Card(int number, int suit);
+};
 
+class Baraja {
+	private:
+		Card mazo[52];
+    public:
+		Baraja();
+		void barajear();
+		void mostrar();
 };
 
 Card::Card() {
-	back = al_load_bitmap("resources/PokerCards/[60x84]/back.png");
+	//back = al_load_bitmap("resources/PokerCards/[60x84]/back.png");
+
 	isHidden = true;
 }
 
-Card::Card(int number, char suit) {
+Card::Card(int number, int suit) {
 	this->number = number;
-	this->suits = suit;
+	this->suits = suit; 
 
 	switch (suit){
-	case 'd':
+	case 0:
 		this->color = true;
+		this->suits = 'd';
 		break;
-	case 'h':
+	case 1:
 		this->color = true;
+		this->suits = 'h';
 		break;
-	case 's':
+	case 2:
 		this->color = false;
+		this->suits = 's';
 		break;
-	case 'c':
+	case 3:
 		this->color = false;
+		this->suits = 'c';
 		break;
 	}
 
@@ -53,3 +73,16 @@ Card::Card(int number, char suit) {
 
 	front = al_load_bitmap(BMP_direction.c_str());
 }
+
+Baraja::Baraja() {
+	int c = 0;
+	for (int i = 0; i < 4; i++) {
+		for (int j = 0; j < 13; j++) {
+			mazo[c] = Card();
+			mazo[c] = Card(j,i);
+			c++;
+		}
+	}
+}
+
+
