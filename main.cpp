@@ -19,15 +19,14 @@ int main() {
 
 	bool inGame = true;
 
-	al_set_app_name("Solitarie 2022");
 	
 	ALLEGRO_DISPLAY* display = al_create_display(1080, 720);
 	al_set_display_icon(display, al_load_bitmap("resources/Solitarie2022-AppLogo.png"));
 	ALLEGRO_EVENT_QUEUE* colaEventos = al_create_event_queue();
-	ALLEGRO_COLOR fondo = al_color_name("forestgreen");
+	ALLEGRO_COLOR fondo = al_color_name("slategray");
 	ALLEGRO_EVENT evento;
 
-	ALLEGRO_BITMAP* fondo_BMP = al_load_bitmap("resources/Solitarie2022-Logo.png");
+	ALLEGRO_BITMAP* logo_BMP = al_load_bitmap("resources/Solitarie2022-Logo.png");
 
 	int ancho = al_get_display_width(display);
 	int alto = al_get_display_height(display);
@@ -49,7 +48,7 @@ int main() {
 
 		al_clear_to_color(fondo);
 
-		al_draw_bitmap(fondo_BMP, (ancho / 2) - (al_get_bitmap_width(fondo_BMP) / 2), alto / 8, 0);
+		al_draw_bitmap(logo_BMP, (ancho / 2) - (al_get_bitmap_width(logo_BMP) / 2), alto / 12, 0);
 		play.print();
 		HTP.print();
 		close.print();
@@ -63,15 +62,6 @@ int main() {
 
 			ancho = al_get_display_width(display);
 			alto = al_get_display_height(display);
-
-			play.setPosX(ancho / 2, ALLEGRO_ALIGN_CENTRE);
-			play.setPosY(alto / 2);
-
-			HTP.setPosX(ancho / 2,  ALLEGRO_ALIGN_CENTRE);
-			HTP.setPosY((alto / 2) + ((alto / 2) / 4));
-
-			close.setPosX(ancho / 2, ALLEGRO_ALIGN_CENTRE);
-			close.setPosY( (alto / 2) + (alto / 4) );
 
 			break;
 		case ALLEGRO_EVENT_MOUSE_AXES:
@@ -98,7 +88,7 @@ int main() {
 
 	al_destroy_display(display);
 	al_destroy_event_queue(colaEventos);
-	al_destroy_bitmap(fondo_BMP);
+	al_destroy_bitmap(logo_BMP);
 
 	al_shutdown_native_dialog_addon();
 	al_shutdown_image_addon();
