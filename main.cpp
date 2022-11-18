@@ -1,6 +1,7 @@
 
 #include <iostream>
 #include"objects/classButton.hpp"
+#include"objects/classCard.hpp"
 
 #include <allegro5/allegro5.h>
 #include <allegro5/allegro_native_dialog.h>
@@ -17,6 +18,8 @@ void setNewPos(boton, ALLEGRO_EVENT);
 void HTP_dialog(ALLEGRO_DISPLAY* display);
 
 int main() {
+
+	Baraja sol();
 
 
 	inits();
