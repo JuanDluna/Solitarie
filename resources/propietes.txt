@@ -1,2 +1,6 @@
 ButtonColor(Without Pressing): #bdffff
 ButtonColor(Pressing): #006750
+
+NEW BUTTON COLOR
+WP:	BLACK
+P:	WHITE
