@@ -7,12 +7,7 @@
 
 using namespace std;
 
-//TODO Construir baraja con shuffle
-
-
-using namespace std;
-
-enum PALO{DIAMOND, HEART, SPADES, CLUBS};
+enum PALO{DIAMOND = 1, HEART, SPADES, CLUBS};
 
 class Card {
 private:
@@ -20,11 +15,11 @@ private:
 	ALLEGRO_BITMAP* front;
 	ALLEGRO_BITMAP* back;
 	int number;		// Numero de la carta
-	char suits;		// Palo de la carta
+	int suit;		// Palo de la carta
 	bool color;		// Rojo = True \\ Negro = False
 	bool isHidden;
 
-	string BMP_direction = "resources/PokerCards/[60x84]/";
+	string BMP_direction = "resources/OwnCards/";
 
 
 
@@ -43,31 +38,31 @@ class Baraja {
 };
 
 Card::Card() {
-	//back = al_load_bitmap("resources/PokerCards/[60x84]/back.png");
+	back = al_load_bitmap("resources/OwnCards/BackCard.png");
 
 	isHidden = true;
 }
 
 Card::Card(int number, int suit) {
 	this->number = number;
-	this->suits = suit; 
+	this->suit = suit; 
 
 	switch (suit){
-	case 0:
+	case DIAMOND:
 		this->color = true;
-		this->suits = 'd';
+		this->suit = DIAMOND;
 		break;
-	case 1:
+	case HEART:
 		this->color = true;
-		this->suits = 'h';
+		this->suit = HEART;
 		break;
-	case 2:
+	case SPADES:
 		this->color = false;
-		this->suits = 's';
+		this->suit = SPADES;
 		break;
-	case 3:
+	case CLUBS:
 		this->color = false;
-		this->suits = 'c';
+		this->suit = CLUBS;
 		break;
 	}
 
@@ -78,10 +73,9 @@ Card::Card(int number, int suit) {
 
 Baraja::Baraja() {
 	int c = 0;
-	for (int i = 0; i < 4; i++) {
-		for (int j = 0; j < 13; j++) {
-			mazo.push_back(Card());
-			mazo.push_back(Card(j, i));
+	for (int i = 1; i <= 4; i++) {
+		for (int j = 1; j <= 13; j++) {
+			mazo.push_back(Card(i, j));
 		}
 	}
 
