@@ -12,7 +12,7 @@ using namespace std;
 //TODO Cambio de ventana en menu a juego
 //TODO Construir baraja con shuffle
 //
-
+int newScene(ALLEGRO_EVENT_QUEUE*);
 void inits();
 void setNewPos(boton, ALLEGRO_EVENT);
 void HTP_dialog(ALLEGRO_DISPLAY* display);
@@ -26,7 +26,7 @@ int main() {
 
 	bool inGame = true;
 
-	
+	ALLEGRO_TIMER* timer = al_create_timer(1.0 / 30.0);
 	ALLEGRO_DISPLAY* display = al_create_display(1080, 720);
 	al_set_display_icon(display, al_load_bitmap("resources/Solitarie2022-AppLogo.png"));
 	ALLEGRO_EVENT_QUEUE* colaEventos = al_create_event_queue();
@@ -48,7 +48,8 @@ int main() {
 
 	al_register_event_source(colaEventos, al_get_display_event_source(display));
 	al_register_event_source(colaEventos, al_get_mouse_event_source());
-
+	bool redraw = true;
+	al_start_timer(timer);
 	while (inGame) {
 
 		al_wait_for_event(colaEventos, &evento);
@@ -59,6 +60,10 @@ int main() {
 		play.print();
 		HTP.print();
 		close.print();
+
+
+		if (evento.type == ALLEGRO_EVENT_TIMER) //TODO falta implementar  cuando el redraw será igual a false 
+			redraw = true;
 
 		switch (evento.type) {
 		case ALLEGRO_EVENT_DISPLAY_CLOSE:
@@ -78,7 +83,7 @@ int main() {
 			break;
 		case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN:
 			if (play.clickAboveButton(evento))
-				cout << "Come pija cagada\n";
+				newScene(colaEventos);
 			if (HTP.clickAboveButton(evento))
 				HTP_dialog(display);
 			if (close.clickAboveButton(evento))
@@ -96,7 +101,7 @@ int main() {
 	al_destroy_display(display);
 	al_destroy_event_queue(colaEventos);
 	al_destroy_bitmap(logo_BMP);
-
+	al_destroy_timer(timer);
 	al_shutdown_native_dialog_addon();
 	al_shutdown_image_addon();
 	al_uninstall_mouse();
@@ -129,5 +134,15 @@ void HTP_dialog(ALLEGRO_DISPLAY* display){
 		NULL,
 		ALLEGRO_MESSAGEBOX_QUESTION
 	);
+	int newScene(ALLEGRO_EVENT_QUEUE * colaEventos) {
 
+		while (true) {
+			ALLEGRO_EVENT evento;
+
+			al_wait_for_event(colaEventos, &evento);
+			al_clear_to_color(al_map_rgb(0, 0, 0));
+			al_flip_display();
+		}
+		return 1;
+	}
 }
