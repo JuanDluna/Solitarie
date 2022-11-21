@@ -69,7 +69,7 @@ Card::Card(int number, int suit) {
 		break;
 	}
 
-	BMP_direction += to_string(number) + suit + ".png";
+	BMP_direction += to_string(suit) + "_", to_string(number) + ".png";
 
 	front = al_load_bitmap(BMP_direction.c_str());
 }

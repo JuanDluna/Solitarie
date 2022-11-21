@@ -9,9 +9,8 @@
 
 using namespace std;
 
-//TODO Cambio de ventana en menu a juego
 //TODO Construir baraja con shuffle
-//
+
 int newScene(ALLEGRO_EVENT_QUEUE*);
 void inits();
 void setNewPos(boton, ALLEGRO_EVENT);
@@ -132,17 +131,16 @@ void HTP_dialog(ALLEGRO_DISPLAY* display){
 		"-El orden de apilacion es ascendente (Por ejemplo, si se quiere mover un A's , se tiene que poner encima de un 2)"
 		,
 		NULL,
-		ALLEGRO_MESSAGEBOX_QUESTION
-	);
-	int newScene(ALLEGRO_EVENT_QUEUE * colaEventos) {
+		ALLEGRO_MESSAGEBOX_QUESTION);
+}
+int newScene(ALLEGRO_EVENT_QUEUE * colaEventos) {
 
-		while (true) {
-			ALLEGRO_EVENT evento;
+	while (true) {
+		ALLEGRO_EVENT evento;
 
-			al_wait_for_event(colaEventos, &evento);
-			al_clear_to_color(al_map_rgb(0, 0, 0));
-			al_flip_display();
-		}
-		return 1;
+		al_wait_for_event(colaEventos, &evento);
+		al_clear_to_color(al_map_rgb(0, 0, 0));
+		al_flip_display();
 	}
+	return 1;
 }
