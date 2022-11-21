@@ -9,7 +9,21 @@
 
 using namespace std;
 
-//TODO Construir baraja con shuffle
+/*
+	TODO (Maniana):
+		Escena principal de juego
+		Establecer clase carta
+
+	TODO (Semana):
+		Lista cartas
+		Movimiento de carta
+	TODO(General):
+		Pila carta
+		Menu 1 o 3 cartas
+		Logica restante de juego
+
+*/
+
 
 int newScene(ALLEGRO_EVENT_QUEUE*);
 void inits();
