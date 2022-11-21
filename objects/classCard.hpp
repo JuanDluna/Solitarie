@@ -1,13 +1,14 @@
 #include <string>
 #include <iostream>
+#include <vector>
+#include <random>
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_image.h>
 
 using namespace std;
 
-//TODO Cambio de ventana en menu a juego
 //TODO Construir baraja con shuffle
-//
+
 
 using namespace std;
 
@@ -15,6 +16,7 @@ enum PALO{DIAMOND, HEART, SPADES, CLUBS};
 
 class Card {
 private:
+
 	ALLEGRO_BITMAP* front;
 	ALLEGRO_BITMAP* back;
 	int number;		// Numero de la carta
@@ -33,7 +35,7 @@ public:
 
 class Baraja {
 	private:
-		Card mazo[52];
+		vector <Card> mazo;
     public:
 		Baraja();
 		void barajear();
@@ -78,11 +80,15 @@ Baraja::Baraja() {
 	int c = 0;
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 13; j++) {
-			mazo[c] = Card();
-			mazo[c] = Card(j,i);
-			c++;
+			mazo.push_back(Card());
+			mazo.push_back(Card(j, i));
 		}
 	}
+
+	std::random_device rd;
+	std::mt19937 s(rd()); //mersenne twister engine for shuffle
+
+	std::shuffle(mazo.begin(), mazo.end(), rd); //vector mezclado
 }
 
 

@@ -20,7 +20,6 @@ int main() {
 
 	Baraja sol();
 
-
 	inits();
 
 	bool inGame = true;
