@@ -33,7 +33,6 @@ class Baraja {
 		vector <Card> mazo;
     public:
 		Baraja();
-		void barajear();
 		void mostrar();
 };
 

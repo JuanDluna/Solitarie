@@ -25,6 +25,8 @@ public:
 	inline int getPosY() { return positionY; }
 	inline float getWidht() { return widht; }
 	inline float getHeight() { return height; }
+	inline int getPosX_With_Widht() { return positionX + widht; }
+	inline int getPosY_With_Height() { return positionY + height; }
 
 	void print();
 	bool isAboveButton();

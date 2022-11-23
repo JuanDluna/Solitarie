@@ -17,6 +17,7 @@ using namespace std;
 	TODO (Semana):
 		Lista cartas
 		Movimiento de carta
+
 	TODO(General):
 		Pila carta
 		Menu 1 o 3 cartas
@@ -42,7 +43,7 @@ int main() {
 	ALLEGRO_DISPLAY* display = al_create_display(1080, 720);
 	al_set_display_icon(display, al_load_bitmap("resources/Solitarie2022-AppLogo.png"));
 	ALLEGRO_EVENT_QUEUE* colaEventos = al_create_event_queue();
-	ALLEGRO_COLOR fondo = al_color_name("slategray");
+	ALLEGRO_COLOR fondo = al_color_name("black");
 	ALLEGRO_EVENT evento;
 
 	ALLEGRO_BITMAP* logo_BMP = al_load_bitmap("resources/Solitarie2022-Logo.png");
@@ -51,8 +52,8 @@ int main() {
 	int alto = al_get_display_height(display);
 
 	boton play("resources/ButtonPlayPressing.png", "resources/ButtonPlayWithoutPressing.png", ancho / 2, alto / 2, ALLEGRO_ALIGN_CENTER);
-	boton HTP("resources/Button_HTP_Pressing.png", "resources/Button_HTP_WithoutPressing.png", ancho / 2, (alto / 2) + ((alto / 2) / 4), ALLEGRO_ALIGN_CENTER);
-	boton close("resources/ButtonClosePressing.png", "resources/ButtonCloseWithoutPressing.png", ancho / 2, (alto / 2) + (alto / 4), ALLEGRO_ALIGN_CENTER);
+	boton HTP("resources/Button_HTP_Pressing.png", "resources/Button_HTP_WithoutPressing.png", ancho / 2, play.getPosY_With_Height() + 20, ALLEGRO_ALIGN_CENTER);
+	boton close("resources/ButtonClosePressing.png", "resources/ButtonCloseWithoutPressing.png", ancho / 2, HTP.getPosY_With_Height() + 20, ALLEGRO_ALIGN_CENTER);
 	// La clase boton, personaliza el boton con las imagenes proporcionadas, la posicion en X y Y ademas de la alineacion conforme a esa posicion
 	// Si la alineacion es al centro es0 significara que la mitad estara en la posicion X proporcionada
 	// Si la alineacion es a la derecha, la imagen estara por la derecha del punto X proporcionado 
@@ -80,13 +81,6 @@ int main() {
 		switch (evento.type) {
 		case ALLEGRO_EVENT_DISPLAY_CLOSE:
 			inGame = false;
-			break;
-		case ALLEGRO_EVENT_DISPLAY_RESIZE:
-			al_acknowledge_resize(display);
-
-			ancho = al_get_display_width(display);
-			alto = al_get_display_height(display);
-
 			break;
 		case ALLEGRO_EVENT_MOUSE_AXES:
 			play.print();
@@ -126,7 +120,6 @@ void inits() {
 	al_init_native_dialog_addon();
 	al_init_image_addon();
 	al_install_mouse();
-	al_set_new_display_flags(ALLEGRO_RESIZABLE);
 }
 
 void HTP_dialog(ALLEGRO_DISPLAY* display){
@@ -152,7 +145,7 @@ int newScene(ALLEGRO_EVENT_QUEUE * colaEventos) {
 		ALLEGRO_EVENT evento;
 
 		al_wait_for_event(colaEventos, &evento);
-		al_clear_to_color(al_map_rgb(0, 0, 0));
+		al_clear_to_color( al_color_name("black") );
 		al_flip_display();
 	}
 	return 1;
