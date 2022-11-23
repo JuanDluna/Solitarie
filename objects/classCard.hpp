@@ -71,6 +71,7 @@ Card::Card(int number, int suit) {
 }
 
 Baraja::Baraja() {
+
 	int c = 0;
 	for (int i = 1; i <= 4; i++) {
 		for (int j = 1; j <= 13; j++) {

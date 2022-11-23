@@ -9,6 +9,7 @@
 
 using namespace std;
 
+<<<<<<< Updated upstream
 /*
 	TODO (Maniana):
 		Escena principal de juego
@@ -25,6 +26,9 @@ using namespace std;
 
 */
 
+=======
+//TODO Construir baraja con shuffle
+>>>>>>> Stashed changes
 
 int newScene(ALLEGRO_EVENT_QUEUE*);
 void inits();
