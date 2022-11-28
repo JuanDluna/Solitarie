@@ -89,8 +89,35 @@ int main() {
 			close.print();
 			break;
 		case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN:
-			if (play.clickAboveButton(evento))
-				newScene(colaEventos);
+
+			if (play.clickAboveButton(evento)) {
+
+				logo_BMP = al_load_bitmap("resources/PlayMainScene.png");
+				boton cartasSobrantes("resources/OwnCards/BackCard.png", "resources/OwnCards/BackCard.png", ancho - 10, 10, ALLEGRO_ALIGN_LEFT);
+				
+
+				while (true) {
+
+					al_wait_for_event(colaEventos, &evento);
+					al_clear_to_color(al_color_name("black"));
+					al_draw_bitmap(logo_BMP, 0, 0, 0);
+					cartasSobrantes.print();
+					
+					switch (evento.type) {
+					case ALLEGRO_EVENT_DISPLAY_CLOSE:
+						inGame = false;
+						break;
+					case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN:
+						
+						if (cartasSobrantes.clickAboveButton(evento)) {
+							cout << "come pija palos";
+						}
+					}
+					al_flip_display();
+
+
+				}
+			}
 			if (HTP.clickAboveButton(evento))
 				HTP_dialog(display);
 			if (close.clickAboveButton(evento))
@@ -142,11 +169,16 @@ void HTP_dialog(ALLEGRO_DISPLAY* display){
 }
 int newScene(ALLEGRO_EVENT_QUEUE * colaEventos) {
 
+	ALLEGRO_BITMAP *fondoJuego = al_load_bitmap("resources/PlayMainScene.png");
+
 	while (true) {
 		ALLEGRO_EVENT evento;
 
 		al_wait_for_event(colaEventos, &evento);
 		al_clear_to_color( al_color_name("black") );
+		al_draw_bitmap(fondoJuego, 0, 0, 0);
+		
+
 		al_flip_display();
 	}
 	return 1;
