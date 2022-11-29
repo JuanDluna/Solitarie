@@ -25,9 +25,8 @@ using namespace std;
 
 */
 
-//TODO Construir baraja con shuffle
-
 int newScene(ALLEGRO_EVENT_QUEUE*);
+void logicaMouse(ALLEGRO_MOUSE_STATE&, boton);
 void inits();
 void setNewPos(boton, ALLEGRO_EVENT);
 void HTP_dialog(ALLEGRO_DISPLAY* display);
@@ -46,6 +45,7 @@ int main() {
 	ALLEGRO_EVENT_QUEUE* colaEventos = al_create_event_queue();
 	ALLEGRO_COLOR fondo = al_color_name("black");
 	ALLEGRO_EVENT evento;
+	ALLEGRO_MOUSE_STATE state;
 
 	ALLEGRO_BITMAP* logo_BMP = al_load_bitmap("resources/Solitarie2022-Logo.png");
 
@@ -96,7 +96,7 @@ int main() {
 				boton cartasSobrantes("resources/OwnCards/BackCard.png", "resources/OwnCards/BackCard.png", ancho - 10, 10, ALLEGRO_ALIGN_LEFT);
 				
 
-				while (true) {
+				while (inGame){
 
 					al_wait_for_event(colaEventos, &evento);
 					al_clear_to_color(al_color_name("black"));
@@ -111,7 +111,9 @@ int main() {
 						
 						if (cartasSobrantes.clickAboveButton(evento)) {
 							cout << "come pija palos";
-						}
+							logicaMouse(state, cartasSobrantes);
+						}	
+			
 					}
 					al_flip_display();
 
@@ -167,19 +169,15 @@ void HTP_dialog(ALLEGRO_DISPLAY* display){
 		NULL,
 		ALLEGRO_MESSAGEBOX_QUESTION);
 }
-int newScene(ALLEGRO_EVENT_QUEUE * colaEventos) {
+void logicaMouse(ALLEGRO_MOUSE_STATE &state, boton aMover){
+	
+	al_get_mouse_state(&state);
+	aMover.isAboveButton();
 
-	ALLEGRO_BITMAP *fondoJuego = al_load_bitmap("resources/PlayMainScene.png");
-
-	while (true) {
-		ALLEGRO_EVENT evento;
-
-		al_wait_for_event(colaEventos, &evento);
-		al_clear_to_color( al_color_name("black") );
-		al_draw_bitmap(fondoJuego, 0, 0, 0);
-		
-
-		al_flip_display();
+	if (al_mouse_button_down(&state, 1) && aMover.isAboveButton()){
+	
+		aMover.setPos(state.x - 100, state.y - 100);
 	}
-	return 1;
+
+
 }
