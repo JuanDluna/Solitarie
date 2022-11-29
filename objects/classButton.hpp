@@ -20,6 +20,7 @@ public:
 
 	inline void setPosX(int posX, int alineation);
 	inline void setPosY(int posY) { this->positionY = posY; }
+	inline void setPos(int posX, int posY);
 
 	inline int getPosX() { return positionX; }
 	inline int getPosY() { return positionY; }
@@ -58,6 +59,11 @@ boton::boton(const char* file_name_button_pressed, const char* file_name_button_
 		break;
 	}
 
+}
+void boton::setPos(int posX, int posY) {
+
+	this->positionX = posX;
+	this->positionX = posY;
 }
 void boton::setPosX(int posX, int alineation) {
 
