@@ -110,7 +110,7 @@ int main() {
 					case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN:
 						
 						if (cartasSobrantes.clickAboveButton(evento)) {
-							cout << "come pija palos";
+							cout << "putó palos de mierda alch ni mereces vivir puto cagado\n";
 						}
 					}
 					al_flip_display();
