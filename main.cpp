@@ -26,7 +26,7 @@ using namespace std;
 */
 
 int newScene(ALLEGRO_EVENT_QUEUE*);
-void logicaMouse(ALLEGRO_MOUSE_STATE&, boton);
+void logicaMouse(ALLEGRO_MOUSE_STATE&, boton&);
 void inits();
 void setNewPos(boton, ALLEGRO_EVENT);
 void HTP_dialog(ALLEGRO_DISPLAY* display);
@@ -108,6 +108,7 @@ int main() {
 						inGame = false;
 						break;
 					case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN:
+					case ALLEGRO_EVENT_MOUSE_BUTTON_UP:
 						
 						if (cartasSobrantes.clickAboveButton(evento)) {
 <<<<<<< HEAD
@@ -174,14 +175,14 @@ void HTP_dialog(ALLEGRO_DISPLAY* display){
 		NULL,
 		ALLEGRO_MESSAGEBOX_QUESTION);
 }
-void logicaMouse(ALLEGRO_MOUSE_STATE &state, boton aMover){
+void logicaMouse(ALLEGRO_MOUSE_STATE &state, boton& aMover){
 	
 	al_get_mouse_state(&state);
 	aMover.isAboveButton();
 
 	if (al_mouse_button_down(&state, 1) && aMover.isAboveButton()){
 	
-		aMover.setPos(state.x - 100, state.y - 100);
+		aMover.setPos(state.x - 10, state.y - 10);
 	}
 
 
