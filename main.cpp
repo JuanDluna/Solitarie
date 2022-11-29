@@ -33,9 +33,8 @@ void HTP_dialog(ALLEGRO_DISPLAY* display);
 
 int main() {
 
-	Baraja sol();
-
 	inits();
+	Baraja sol;
 
 	bool inGame = true;
 
@@ -51,7 +50,7 @@ int main() {
 
 	int ancho = al_get_display_width(display);
 	int alto = al_get_display_height(display);
-
+	boton cartasSobrantes("resources/OwnCards/BackCard.png", "resources/OwnCards/BackCard.png", ancho - 300, 10, ALLEGRO_ALIGN_RIGHT);
 	boton play("resources/ButtonPlayPressing.png", "resources/ButtonPlayWithoutPressing.png", ancho / 2, alto / 2, ALLEGRO_ALIGN_CENTER);
 	boton HTP("resources/Button_HTP_Pressing.png", "resources/Button_HTP_WithoutPressing.png", ancho / 2, play.getPosY_With_Height() + 20, ALLEGRO_ALIGN_CENTER);
 	boton close("resources/ButtonClosePressing.png", "resources/ButtonCloseWithoutPressing.png", ancho / 2, HTP.getPosY_With_Height() + 20, ALLEGRO_ALIGN_CENTER);
@@ -93,33 +92,29 @@ int main() {
 			if (play.clickAboveButton(evento)) {
 
 				logo_BMP = al_load_bitmap("resources/PlayMainScene.png");
-				boton cartasSobrantes("resources/OwnCards/BackCard.png", "resources/OwnCards/BackCard.png", ancho - 10, 10, ALLEGRO_ALIGN_LEFT);
-				
+				//boton cartasobrante1("resourses/")
 
 				while (inGame){
 
 					al_wait_for_event(colaEventos, &evento);
 					al_clear_to_color(al_color_name("black"));
 					al_draw_bitmap(logo_BMP, 0, 0, 0);
-					cartasSobrantes.print();
-					
+					cartasSobrantes.print();	
 					switch (evento.type) {
 					case ALLEGRO_EVENT_DISPLAY_CLOSE:
 						inGame = false;
 						break;
+					case ALLEGRO_EVENT_MOUSE_AXES:
 					case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN:
 					case ALLEGRO_EVENT_MOUSE_BUTTON_UP:
-						
-						if (cartasSobrantes.clickAboveButton(evento)) {
-<<<<<<< HEAD
+						if (cartasSobrantes.isAboveButton() ) {
 							cout << "putó palos de mierda alch ni mereces vivir puto cagado\n";
-						}
-=======
-							cout << "come pija palos";
 							logicaMouse(state, cartasSobrantes);
-						}	
-			
->>>>>>> master
+							sol.MostrarC(3);
+						}
+						break;
+						break;
+
 					}
 					al_flip_display();
 
@@ -180,9 +175,9 @@ void logicaMouse(ALLEGRO_MOUSE_STATE &state, boton& aMover){
 	al_get_mouse_state(&state);
 	aMover.isAboveButton();
 
-	if (al_mouse_button_down(&state, 1) && aMover.isAboveButton()){
+	if (state.buttons == 1 && aMover.isAboveButton()){
 	
-		aMover.setPos(state.x - 10, state.y - 10);
+		aMover.setPos(state.y - 100, state.x - 100);
 	}
 
 

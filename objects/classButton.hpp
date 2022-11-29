@@ -60,11 +60,13 @@ boton::boton(const char* file_name_button_pressed, const char* file_name_button_
 	}
 
 }
+
 void boton::setPos(int posX, int posY) {
 
 	this->positionX = posX;
 	this->positionX = posY;
 }
+
 void boton::setPosX(int posX, int alineation) {
 
 	switch (alineation) {

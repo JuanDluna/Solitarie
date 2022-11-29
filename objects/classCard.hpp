@@ -26,6 +26,7 @@ private:
 public:
 	Card();
 	Card(int number, int suit);
+	void mostrar();
 };
 
 class Baraja {
@@ -33,46 +34,49 @@ class Baraja {
 		vector <Card> mazo;
     public:
 		Baraja();
-		void mostrar();
+		void MostrarC(int);
 };
 
 Card::Card() {
-	back = al_load_bitmap("resources/OwnCards/BackCard.png");
-
-	isHidden = true;
+	this->number = 0;
+	this->suit = 0;
+	this->front = NULL;
+	this->back = al_load_bitmap("resources/OwnCards/BackCard.png");
+	this->isHidden = true;
 }
 
-Card::Card(int number, int suit) {
+Card::Card(int suit, int number) {
 	this->number = number;
-	this->suit = suit; 
+	this->suit = suit;
 
 	switch (suit){
 	case DIAMOND:
 		this->color = true;
-		this->suit = DIAMOND;
 		break;
 	case HEART:
 		this->color = true;
-		this->suit = HEART;
 		break;
 	case SPADES:
 		this->color = false;
-		this->suit = SPADES;
 		break;
 	case CLUBS:
 		this->color = false;
-		this->suit = CLUBS;
 		break;
 	}
 
-	BMP_direction += to_string(suit) + "_", to_string(number) + ".png";
+	BMP_direction += to_string(suit) + "_" + to_string(number) + ".png";
 
-	front = al_load_bitmap(BMP_direction.c_str());
+	front = al_load_bitmap( BMP_direction.c_str() );
+	back = al_load_bitmap("resources/OwnCards/BackCard.png");
+	isHidden = true;
+}
+
+void Card::mostrar() {
+	al_draw_bitmap(this->front, 1080 / 2, 720 / 2, 0);
 }
 
 Baraja::Baraja() {
 
-	int c = 0;
 	for (int i = 1; i <= 4; i++) {
 		for (int j = 1; j <= 13; j++) {
 			mazo.push_back(Card(i, j));
@@ -84,5 +88,11 @@ Baraja::Baraja() {
 
 	std::shuffle(mazo.begin(), mazo.end(), rd); //vector mezclado
 }
+
+void Baraja::MostrarC(int cont) {
+	mazo[cont].mostrar();
+}
+
+
 
 
