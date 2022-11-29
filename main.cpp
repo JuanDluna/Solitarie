@@ -177,7 +177,8 @@ void logicaMouse(ALLEGRO_MOUSE_STATE &state, boton& aMover){
 
 	if (state.buttons == 1 && aMover.isAboveButton()){
 	
-		aMover.setPos(state.y - 100, state.x - 100);
+		aMover.setPosX(state.x - 100, ALLEGRO_ALIGN_RIGHT);
+		aMover.setPosY(state.y - 100);
 	}
 
 
