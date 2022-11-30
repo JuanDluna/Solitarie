@@ -27,6 +27,9 @@ public:
 	Card();
 	Card(int number, int suit);
 	void mostrar();
+	bool getColor(){ return color; }
+	int getN() { return number; }
+	void Voltear() { isHidden = false; }
 };
 
 class Baraja {

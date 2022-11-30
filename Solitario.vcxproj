@@ -145,6 +145,7 @@
   <ItemGroup>
     <ClInclude Include="objects\classButton.hpp" />
     <ClInclude Include="objects\classCard.hpp" />
+    <ClInclude Include="objects\listas.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
