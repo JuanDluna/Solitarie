@@ -28,7 +28,7 @@ Baraja::Baraja() {
 }
 
 void Baraja::MostrarC(int cont) {
-	mazo[cont].print();
+	mazo.at(cont).print();
 }
 
 Card Baraja::popCard() {

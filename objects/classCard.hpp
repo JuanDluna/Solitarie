@@ -30,7 +30,7 @@ public:
 	void Voltear() { isHidden = !isHidden; }
 	void print() override;
 	void mover();
-
+	Card operator= (const Card& carta);
 
 };
 
@@ -95,3 +95,19 @@ void Card::mover() {
 	if (!isHidden and isAboveButton() and state.buttons == 1) 
 		setPos(state.x - 100, state.y - 100);
 }
+
+Card Card::operator=(const Card& carta) {
+
+	this->front = al_clone_bitmap(carta.front);
+	this->number = carta.number;
+	this->suit = carta.suit;
+	this->color = carta.color;
+	this->isHidden = carta.isHidden;
+
+	this->positionX = carta.positionX;
+	this->positionY = carta.positionY;
+	this->width = carta.width;
+	this->height = carta.height;
+	return *this;
+}
+
