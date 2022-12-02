@@ -4,8 +4,8 @@
 #include <allegro5/allegro_native_dialog.h>
 #include <allegro5/allegro_color.h>
 
-//#include "objects/classBaraja.hpp"
-#include "objects/cartasSobrante.hpp"
+#include "objects/classBaraja.hpp"
+//#include "objects/cartasSobrante.hpp"
 //#include "objects/listas.h"
 
 
@@ -93,7 +93,7 @@ int main() {
 
 			if (play.clickAboveButton(evento)) {
 
-				sobrantes sob1(sol);
+				//sobrantes sob1(sol);
 				logo_BMP = al_load_bitmap("resources/PlayMainScene.png");
 				Card carta1(2, 1, ancho / 2, alto / 2);
 				Card carta2(3, 1, carta1.getPosX_With_Widht() + 200, alto / 2);
@@ -108,7 +108,7 @@ int main() {
 						
 					carta1.print();
 					carta2.print();
-					sob1.print();
+					//sob1.print();
 					switch (evento.type) {
 					case ALLEGRO_EVENT_DISPLAY_CLOSE:
 						inGame = false;

@@ -19,7 +19,6 @@ private:
 public:
 	Card();
 	Card(int suit, int number, int posX, int posY);
-	Card(Card&);
 
 	bool getColor() { return color; }
 	int getNumber() { return number; }
@@ -79,18 +78,6 @@ Card::Card(int suit, int number, int posX, int posY):boton(posX, posY){
 	isHidden = true;
 
 	return;
-}
-
-Card::Card(Card&obj){
-	this->front = al_clone_bitmap(obj.front);
-	this->back = al_clone_bitmap(obj.back);
-	this->width = obj.width;
-	this->height = obj.height;
-
-	this->number = obj.number;
-	this->suit = obj.suit;
-	this->color = obj.color;
-	this->isHidden = obj.isHidden;
 }
 
 void Card::print() {
