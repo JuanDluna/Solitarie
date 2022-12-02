@@ -32,7 +32,7 @@ void Baraja::MostrarC(int cont) {
 }
 
 Card Baraja::popCard() {
-	Card temp = mazo.at(mazo.size());
+	Card temp = mazo.at(mazo.size() - 1);
 	mazo.erase( mazo.end() - 1 ) ;
 	return temp;
 }

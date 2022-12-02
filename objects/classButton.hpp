@@ -66,7 +66,7 @@ boton::boton(int posX, int posY) {
 	button_pressed = nullptr;
 	button_without_pressing = nullptr;
 
-	positionX = posY;
+	positionX = posX;
 	positionY = posY;
 
 
