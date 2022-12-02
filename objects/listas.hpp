@@ -70,8 +70,8 @@ ListaJuego::ListaJuego(Card x) {
 
 bool ListaJuego::insertarJ(Card L, Card N) {
 	bool colorL = L.getColor();
-	int numL = L.getN();
-	if (colorL != N.getColor() && numL == (N.getN() - 1)){
+	int numL = L.getNumber();
+	if (colorL != N.getColor() && numL == (N.getNumber() - 1)){
 		return true;
 	}
 	return false;

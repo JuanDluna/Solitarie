@@ -1,21 +1,19 @@
-ButtonColor(Without Pressing): #bdffff
-ButtonColor(Pressing): #006750
-
 NEW BUTTON COLOR
 WP:	BLACK
 P:	WHITE
 
 
 
+
 Empty 1: 
-	Pos X: 13	Con ancho:	160
-	Pos Y: 11	Con alto:	207
+	Pos X: 10	Con ancho:	147
+	Pos Y: 10	Con alto:	193
 Empty 2:
-	Pos X: 170	Con ancho:	317
-	Pos Y: 11	Con alto:	207
+	Pos X: 158	Con ancho:	295
+	Pos Y: 10	Con alto:	193
 Empty 3:
-	Pos X: 326	Con ancho:	473
-	Pos Y: 11	Con alto:	207
+	Pos X: 306	Con ancho:	443
+	Pos Y: 10	Con alto:	193
 Empty 4:
-	Pos X: 482	Con ancho:	629
-	Pos Y: 11	Con alto:	207
+	Pos X: 454	Con ancho:	591
+	Pos Y: 10	Con alto:	193

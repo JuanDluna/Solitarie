@@ -1,58 +1,61 @@
 #include <string>
-#include <iostream>
-#include <vector>
-#include <random>
-#include <allegro5/allegro.h>
-#include <allegro5/allegro_image.h>
+#include "classButton.hpp"
 
 using namespace std;
 
-enum PALO{DIAMOND = 1, HEART, SPADES, CLUBS};
+enum PALO { DIAMOND = 1, HEART, SPADES, CLUBS };
 
-class Card {
+class Card:public boton{
 private:
-
 	ALLEGRO_BITMAP* front;
 	ALLEGRO_BITMAP* back;
 	int number;		// Numero de la carta
 	int suit;		// Palo de la carta
 	bool color;		// Rojo = True \\ Negro = False
 	bool isHidden;
-
+	
 	string BMP_direction = "resources/OwnCards/";
-
-
 
 public:
 	Card();
-	Card(int number, int suit);
-	void mostrar();
-	bool getColor(){ return color; }
-	int getN() { return number; }
-	void Voltear() { isHidden = false; }
-};
+	Card(int suit, int number, int posX, int posY);
+	Card(Card&);
 
-class Baraja {
-	private:
-		vector <Card> mazo;
-    public:
-		Baraja();
-		void MostrarC(int);
+	bool getColor() { return color; }
+	int getNumber() { return number; }
+	bool getIsHidden() { return isHidden; }
+
+	void setIsHidden(bool isHidden) { this->isHidden = isHidden; }
+
+
+	void Voltear() { isHidden = !isHidden; }
+	void print() override;
+	void mover();
+
+
 };
 
 Card::Card() {
-	this->number = 0;
-	this->suit = 0;
-	this->front = NULL;
 	this->back = al_load_bitmap("resources/OwnCards/BackCard.png");
+	this->width = al_get_bitmap_width(back);
+	this->height = al_get_bitmap_height(back);
+	this->front = nullptr;
+
+	this->number = 1;
+	this->suit = 1;
+	this->color = false;
 	this->isHidden = true;
+	
+	this->positionX = 0;
+	this->positionY = 0;
 }
 
-Card::Card(int suit, int number) {
+Card::Card(int suit, int number, int posX, int posY):boton(posX, posY){
 	this->number = number;
 	this->suit = suit;
+	this->color = false;
 
-	switch (suit){
+	switch (suit) {
 	case DIAMOND:
 		this->color = true;
 		break;
@@ -69,33 +72,39 @@ Card::Card(int suit, int number) {
 
 	BMP_direction += to_string(suit) + "_" + to_string(number) + ".png";
 
-	front = al_load_bitmap( BMP_direction.c_str() );
+	front = al_load_bitmap(BMP_direction.c_str());
 	back = al_load_bitmap("resources/OwnCards/BackCard.png");
+	width = al_get_bitmap_width(front);
+	height = al_get_bitmap_height(front);
 	isHidden = true;
+
+	return;
 }
 
-void Card::mostrar() {
-	al_draw_bitmap(this->front, 1080 / 2, 720 / 2, 0);
+Card::Card(Card&obj){
+	this->front = al_clone_bitmap(obj.front);
+	this->back = al_clone_bitmap(obj.back);
+	this->width = obj.width;
+	this->height = obj.height;
+
+	this->number = obj.number;
+	this->suit = obj.suit;
+	this->color = obj.color;
+	this->isHidden = obj.isHidden;
 }
 
-Baraja::Baraja() {
-
-	for (int i = 1; i <= 4; i++) {
-		for (int j = 1; j <= 13; j++) {
-			mazo.push_back(Card(i, j));
-		}
+void Card::print() {
+	if (isHidden) {
+		al_draw_bitmap(back, boton::positionX, boton::positionY, 0);
+		return;
 	}
-
-	std::random_device rd;
-	std::mt19937 s(rd()); //mersenne twister engine for shuffle
-
-	std::shuffle(mazo.begin(), mazo.end(), rd); //vector mezclado
+	al_draw_bitmap(front, positionX, positionY, 0);
+	return;
 }
 
-void Baraja::MostrarC(int cont) {
-	mazo[cont].mostrar();
+void Card::mover() {
+	ALLEGRO_MOUSE_STATE state;
+	al_get_mouse_state(&state);
+	if (!isHidden and isAboveButton() and state.buttons == 1) 
+		setPos(state.x - 100, state.y - 100);
 }
-
-
-
-

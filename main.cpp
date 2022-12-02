@@ -1,11 +1,13 @@
 
 #include <iostream>
-#include"objects/classButton.hpp"
-#include"objects/classCard.hpp"
-
 #include <allegro5/allegro5.h>
 #include <allegro5/allegro_native_dialog.h>
 #include <allegro5/allegro_color.h>
+
+//#include "objects/classBaraja.hpp"
+#include "objects/cartasSobrante.hpp"
+//#include "objects/listas.h"
+
 
 using namespace std;
 
@@ -26,7 +28,7 @@ using namespace std;
 */
 
 int newScene(ALLEGRO_EVENT_QUEUE*);
-void logicaMouse(ALLEGRO_MOUSE_STATE&, boton&);
+void logicaMouse(ALLEGRO_MOUSE_STATE&, Card&);
 void inits();
 void setNewPos(boton, ALLEGRO_EVENT);
 void HTP_dialog(ALLEGRO_DISPLAY* display);
@@ -35,6 +37,7 @@ int main() {
 
 	inits();
 	Baraja sol;
+	//ListaJuego listas;
 
 	bool inGame = true;
 
@@ -50,7 +53,6 @@ int main() {
 
 	int ancho = al_get_display_width(display);
 	int alto = al_get_display_height(display);
-	boton cartasSobrantes("resources/OwnCards/BackCard.png", "resources/OwnCards/BackCard.png", ancho - 300, 10, ALLEGRO_ALIGN_RIGHT);
 	boton play("resources/ButtonPlayPressing.png", "resources/ButtonPlayWithoutPressing.png", ancho / 2, alto / 2, ALLEGRO_ALIGN_CENTER);
 	boton HTP("resources/Button_HTP_Pressing.png", "resources/Button_HTP_WithoutPressing.png", ancho / 2, play.getPosY_With_Height() + 20, ALLEGRO_ALIGN_CENTER);
 	boton close("resources/ButtonClosePressing.png", "resources/ButtonCloseWithoutPressing.png", ancho / 2, HTP.getPosY_With_Height() + 20, ALLEGRO_ALIGN_CENTER);
@@ -91,7 +93,11 @@ int main() {
 
 			if (play.clickAboveButton(evento)) {
 
+				sobrantes sob1(sol);
 				logo_BMP = al_load_bitmap("resources/PlayMainScene.png");
+				Card carta1(2, 1, ancho / 2, alto / 2);
+				Card carta2(3, 1, carta1.getPosX_With_Widht() + 200, alto / 2);
+				carta2.Voltear();
 				//boton cartasobrante1("resourses/")
 
 				while (inGame){
@@ -99,7 +105,10 @@ int main() {
 					al_wait_for_event(colaEventos, &evento);
 					al_clear_to_color(al_color_name("black"));
 					al_draw_bitmap(logo_BMP, 0, 0, 0);
-					cartasSobrantes.print();	
+						
+					carta1.print();
+					carta2.print();
+					sob1.print();
 					switch (evento.type) {
 					case ALLEGRO_EVENT_DISPLAY_CLOSE:
 						inGame = false;
@@ -107,12 +116,10 @@ int main() {
 					case ALLEGRO_EVENT_MOUSE_AXES:
 					case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN:
 					case ALLEGRO_EVENT_MOUSE_BUTTON_UP:
-						if (cartasSobrantes.isAboveButton() ) {
-							cout << "putó palos de mierda alch ni mereces vivir puto cagado\n";
-							logicaMouse(state, cartasSobrantes);
-							sol.MostrarC(3);
-						}
-						break;
+					
+						carta1.mover();
+						carta2.mover();
+						
 						break;
 
 					}
@@ -129,7 +136,7 @@ int main() {
 		}
 
 
-		al_flip_display();
+		  al_flip_display();
 
 	}
 
@@ -170,15 +177,12 @@ void HTP_dialog(ALLEGRO_DISPLAY* display){
 		NULL,
 		ALLEGRO_MESSAGEBOX_QUESTION);
 }
-void logicaMouse(ALLEGRO_MOUSE_STATE &state, boton& aMover){
+void logicaMouse(ALLEGRO_MOUSE_STATE &state, Card& aMover){
 	
 	al_get_mouse_state(&state);
-	aMover.isAboveButton();
 
 	if (state.buttons == 1 && aMover.isAboveButton()){
-	
-		aMover.setPosX(state.x - 100, ALLEGRO_ALIGN_RIGHT);
-		aMover.setPosY(state.y - 100);
+		aMover.mover();
 	}
 
 

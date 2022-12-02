@@ -143,9 +143,11 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="objects\classButton.hpp" />
+    <ClInclude Include="objects\cartasSobrante.hpp" />
     <ClInclude Include="objects\classCard.hpp" />
-    <ClInclude Include="objects\listas.h" />
+    <ClInclude Include="objects\classBaraja.hpp" />
+    <ClInclude Include="objects\classButton.hpp" />
+    <ClInclude Include="objects\listas.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
