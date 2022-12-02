@@ -13,6 +13,9 @@ private:
 	int suit;		// Palo de la carta
 	bool color;		// Rojo = True \\ Negro = False
 	bool isHidden;
+
+	int OriginPosX;
+	int OriginPosY;
 	
 	string BMP_direction = "resources/OwnCards/";
 
@@ -20,14 +23,15 @@ public:
 	Card();
 	Card(int suit, int number, int posX, int posY);
 
-	bool getColor() { return color; }
-	int getNumber() { return number; }
-	bool getIsHidden() { return isHidden; }
+	inline bool getColor() { return color; }
+	inline int getNumber() { return number; }
+	inline int getSuit() { return suit; }
+	inline bool getIsHidden() { return isHidden; }
 
-	void setIsHidden(bool isHidden) { this->isHidden = isHidden; }
+	inline void setIsHidden(bool isHidden) { this->isHidden = isHidden; }
+	inline void setOriginPos(int posX, int posY) { this->OriginPosX = posX; this->OriginPosY = posY; }
 
-
-	void Voltear() { isHidden = !isHidden; }
+	inline void Voltear() { isHidden = !isHidden; }
 	void print() override;
 	void mover();
 
@@ -45,8 +49,8 @@ Card::Card() {
 	this->color = false;
 	this->isHidden = true;
 	
-	this->positionX = 0;
-	this->positionY = 0;
+	this->positionX = this->OriginPosX = 0;
+	this->positionY = this->OriginPosY = 0;
 }
 
 Card::Card(int suit, int number, int posX, int posY):boton(posX, posY){

@@ -1,4 +1,4 @@
-#include <vector>
+#include <stack>
 #include "classBaraja.hpp"
 
 #define MAX_SOBRANTES 24
@@ -6,40 +6,63 @@
 using namespace std;
 
 class sobrantes {
-private:
-	boton backSobrantes = boton("resources/OwnCards/BackCard.png", "resources/OwnCards/BackCard.png", 10, 710, ALLEGRO_ALIGN_LEFT);
-	vector <Card> volteadas;
-	vector <Card> ocultas;
+	Card buttonStack = Card(0, 0, 930, 10);
+	stack <Card> ocultas;
+	stack <Card> mostradas;
 public:
-	sobrantes();
+	inline sobrantes(){}
 	sobrantes(Baraja&);
+
+	bool isMostradasEmpty() { return mostradas.empty(); }
+
 	void print();
-	~sobrantes();
+	bool clickStack(ALLEGRO_EVENT evento);
+	void moveTop();
+
 };
 
-sobrantes::sobrantes(){
-	this->volteadas.clear();
-	this->ocultas.clear();
-}
-
-sobrantes::sobrantes(Baraja&mazo) {
-	/*for (int i = 0; i < MAX_SOBRANTES; i++) {
-		ocultas.emplace_back(mazo.popCard());
-		ocultas.at(i).setIsHidden(true);
+sobrantes::sobrantes(Baraja& obj) {
+	for (int i = 0; i < MAX_SOBRANTES; i++) {
+		this->ocultas.push(obj.popCard());
+		this->ocultas.top().setPos(930, 10);
 	}
-	this->volteadas.clear();*/
 }
 
 void sobrantes::print() {
-	backSobrantes.print();
-	cout << ocultas.size();
-	/*if(volteadas.size() > 0)
-		for (int i = volteadas.size() - 1; i > MAX_SOBRANTES - 3; i--)
-			volteadas.at(i).print();*/
+	buttonStack.print();
+	if (!mostradas.empty()) {
+		mostradas.top().print();
+	}
 }
 
-
-sobrantes::~sobrantes() {
-	volteadas.clear();
-	ocultas.clear();
+bool sobrantes::clickStack(ALLEGRO_EVENT evento) {
+	ALLEGRO_MOUSE_STATE state;
+	al_get_mouse_state(&state);
+	if (buttonStack.clickAboveButton(evento)) {
+		if (ocultas.empty()) {
+			for (int i = 0; i < MAX_SOBRANTES; i++) {
+				ocultas.push(mostradas.top());
+				ocultas.top().Voltear();
+				ocultas.top().setPosX(1070, ALLEGRO_ALIGN_LEFT);
+				mostradas.pop();
+				cout << ocultas.top().getNumber() << '\t' << ocultas.top().getSuit() << endl;
+			}
+			buttonStack.Voltear();
+			return true;
+		}
+		if (mostradas.size() == MAX_SOBRANTES - 1) {
+			buttonStack.Voltear();
+		}
+		mostradas.push(ocultas.top());
+		mostradas.top().Voltear();
+		mostradas.top().setPos(780, 10);
+		ocultas.pop();
+		return true;
+	}
+	return false;
 }
+
+void sobrantes::moveTop() {
+	mostradas.top().mover();
+}
+
