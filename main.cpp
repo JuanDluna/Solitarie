@@ -7,6 +7,7 @@
 //#include "objects/classBaraja.hpp"
 #include "objects/cartasSobrante.hpp"
 //#include "objects/listas.h"
+#include "objects/JDL_List.hpp"
 
 
 using namespace std;
@@ -94,10 +95,8 @@ int main() {
 			if (play.clickAboveButton(evento)) {
 
 				sobrantes sob1(sol);
+				listaCartas lista(sol);
 				logo_BMP = al_load_bitmap("resources/PlayMainScene.png");
-				Card carta1(2, 1, ancho / 2, alto / 2);
-				Card carta2(3, 1, carta1.getPosX_With_Widht() + 200, alto / 2);
-				carta2.Voltear();
 				//boton cartasobrante1("resourses/")
 
 				while (inGame){
@@ -105,9 +104,8 @@ int main() {
 					al_wait_for_event(colaEventos, &evento);
 					al_clear_to_color(al_color_name("black"));
 					al_draw_bitmap(logo_BMP, 0, 0, 0);
-						
-					carta1.print();
-					carta2.print();
+					
+					lista.print();
 					sob1.print();
 					switch (evento.type) {
 					case ALLEGRO_EVENT_DISPLAY_CLOSE:
@@ -119,11 +117,9 @@ int main() {
 							cout << "Puto palos";
 					case ALLEGRO_EVENT_MOUSE_BUTTON_UP:
 						if(!sob1.isMostradasEmpty())
-						sob1.moveTop();
-						carta1.mover();
-						carta2.mover();
-						
-						
+							sob1.moveTop();
+						lista.move();
+												
 						break;
 
 					}

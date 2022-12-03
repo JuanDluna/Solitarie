@@ -97,12 +97,12 @@ void Card::mover() {
 	ALLEGRO_MOUSE_STATE state;
 	al_get_mouse_state(&state);
 	if (!isHidden and isAboveButton() and state.buttons == 1) 
-		setPos(state.x - 100, state.y - 100);
+		setPos(state.x - 70, state.y - 94);
 }
 
 Card Card::operator=(const Card& carta) {
 
-	this->front = al_clone_bitmap(carta.front);
+	this->front = carta.front;
 	this->number = carta.number;
 	this->suit = carta.suit;
 	this->color = carta.color;
