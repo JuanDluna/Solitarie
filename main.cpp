@@ -115,7 +115,10 @@ int main() {
 						break;
 					case ALLEGRO_EVENT_MOUSE_AXES:
 					case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN:
-						sob1.clickStack(evento);
+						if (sob1.clickStack(evento)) {
+							cout << "Cambio de carta.\n";
+							continue;
+						}
 					case ALLEGRO_EVENT_MOUSE_BUTTON_UP:
 						if(!sob1.isMostradasEmpty())
 							sob1.moveTop();
