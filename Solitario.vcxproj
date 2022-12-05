@@ -143,13 +143,11 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="objects\JDL_List.hpp" />
-    <ClInclude Include="objects\ListaCarta.hpp" />
+    <ClInclude Include="objects\classLista.hpp" />
     <ClInclude Include="objects\cartasSobrante.hpp" />
     <ClInclude Include="objects\classCard.hpp" />
     <ClInclude Include="objects\classBaraja.hpp" />
     <ClInclude Include="objects\classButton.hpp" />
-    <ClInclude Include="objects\listas.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -23,9 +23,6 @@
     <ClInclude Include="objects\classButton.hpp">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="objects\listas.hpp">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="objects\classCard.hpp">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
@@ -35,10 +32,7 @@
     <ClInclude Include="objects\cartasSobrante.hpp">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="objects\ListaCarta.hpp">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="objects\JDL_List.hpp">
+    <ClInclude Include="objects\classLista.hpp">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

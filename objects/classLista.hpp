@@ -55,8 +55,7 @@ void listaCartas::print() {
 
 bool listaCartas::move() {
 	for (int i = 0; i < MAX_COLUMNAS; i++) {
-		columnas[i].front().mover();
-		return true;
+		columnas[i].back().mover();
 	}
-	return false;
+	return true;
 }

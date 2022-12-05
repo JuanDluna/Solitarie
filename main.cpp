@@ -4,10 +4,8 @@
 #include <allegro5/allegro_native_dialog.h>
 #include <allegro5/allegro_color.h>
 
-//#include "objects/classBaraja.hpp"
 #include "objects/cartasSobrante.hpp"
-//#include "objects/listas.h"
-#include "objects/JDL_List.hpp"
+#include "objects/classLista.hpp"
 
 
 using namespace std;
@@ -33,6 +31,7 @@ void logicaMouse(ALLEGRO_MOUSE_STATE&, Card&);
 void inits();
 void setNewPos(boton, ALLEGRO_EVENT);
 void HTP_dialog(ALLEGRO_DISPLAY* display);
+void AboutGame_Dialog(ALLEGRO_DISPLAY* display);
 
 int main() {
 
@@ -57,6 +56,7 @@ int main() {
 	boton play("resources/ButtonPlayPressing.png", "resources/ButtonPlayWithoutPressing.png", ancho / 2, alto / 2, ALLEGRO_ALIGN_CENTER);
 	boton HTP("resources/Button_HTP_Pressing.png", "resources/Button_HTP_WithoutPressing.png", ancho / 2, play.getPosY_With_Height() + 20, ALLEGRO_ALIGN_CENTER);
 	boton close("resources/ButtonClosePressing.png", "resources/ButtonCloseWithoutPressing.png", ancho / 2, HTP.getPosY_With_Height() + 20, ALLEGRO_ALIGN_CENTER);
+	boton AboutGame("resources/AboutGamePressing.png", "resources/AboutGame_WithoutPressing.png", ancho - 10, 10, ALLEGRO_ALIGN_LEFT);
 	// La clase boton, personaliza el boton con las imagenes proporcionadas, la posicion en X y Y ademas de la alineacion conforme a esa posicion
 	// Si la alineacion es al centro es0 significara que la mitad estara en la posicion X proporcionada
 	// Si la alineacion es a la derecha, la imagen estara por la derecha del punto X proporcionado 
@@ -76,6 +76,7 @@ int main() {
 		play.print();
 		HTP.print();
 		close.print();
+		AboutGame.print();
 
 
 		if (evento.type == ALLEGRO_EVENT_TIMER) //TODO falta implementar  cuando el redraw será igual a false 
@@ -89,6 +90,7 @@ int main() {
 			play.print();
 			HTP.print();
 			close.print();
+			AboutGame.print();
 			break;
 		case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN:
 
@@ -113,8 +115,7 @@ int main() {
 						break;
 					case ALLEGRO_EVENT_MOUSE_AXES:
 					case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN:
-						if (sob1.clickStack(evento))
-							cout << "Puto palos";
+						sob1.clickStack(evento);
 					case ALLEGRO_EVENT_MOUSE_BUTTON_UP:
 						if(!sob1.isMostradasEmpty())
 							sob1.moveTop();
@@ -130,6 +131,8 @@ int main() {
 			}
 			if (HTP.clickAboveButton(evento))
 				HTP_dialog(display);
+			if (AboutGame.clickAboveButton(evento))
+				AboutGame_Dialog(display);
 			if (close.clickAboveButton(evento))
 				inGame = false;
 			break;
@@ -173,6 +176,23 @@ void HTP_dialog(ALLEGRO_DISPLAY* display){
 		"-No se pueden agrupar cartas del mismo color.\n"
 		"-No se pueden mover cartas a espacios vacios (a menos que sea un rey).\n"
 		"-El orden de apilacion es ascendente (Por ejemplo, si se quiere mover un A's , se tiene que poner encima de un 2)"
+		,
+		NULL,
+		ALLEGRO_MESSAGEBOX_QUESTION);
+}
+void AboutGame_Dialog(ALLEGRO_DISPLAY* display) {
+	al_show_native_message_box(
+		display,
+		"SOLITAIRE 2022",
+		"ABOUT GAME",
+		"Solitaire 2022 es un juego realizado en lenguaje C++\n"
+		"Apoyado en la libreria de ALLEGRO 5 para la parte visual del programa"
+		"Realizado con clases, listas, pilas y otras estructuras de datos.\n\n"
+		"Juego desarrollado por:\n"
+		"-Acosta Ulises Uriel Olvera\n"
+		"-De Luna De la Serna Juan Pablo\n"
+		"-Renteria Zaragoza Johan Jose Maria"
+		"\n(Alumnos de la Universidad Autonoma de Aguascalientes de la carrera Ingenieria en Sistemas Computacionales 3°A de la materia 'Estructuras de Datos')\n"
 		,
 		NULL,
 		ALLEGRO_MESSAGEBOX_QUESTION);
