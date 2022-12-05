@@ -97,9 +97,8 @@ int main() {
 			if (play.clickAboveButton(evento)) {
 
 				sobrantes sob1(sol);
-				listaCartas lista(sol);
 				logo_BMP = al_load_bitmap("resources/PlayMainScene.png");
-				//boton cartasobrante1("resourses/")
+				listaCartas lista(sol);
 
 				while (inGame){
 
